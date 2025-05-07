@@ -8,11 +8,10 @@ import {
   useAccount,
   useBalance,
   useSendTransaction,
-  useTransaction,
   useWaitForTransactionReceipt,
 } from "wagmi";
 import { theme } from "@/style/theme/transfer.theme";
-import { parseEther } from "viem";
+import { Address, parseEther } from "viem";
 import { useSnackbar } from "@/hooks/useSnackbar";
 
 export default function TransferPage() {
@@ -21,7 +20,6 @@ export default function TransferPage() {
     address: accountAddress,
   });
   const { sendTransactionAsync } = useSendTransaction();
-  const {} = useTransaction;
   const { addMessage } = useSnackbar();
 
   const [address, setAddress] = React.useState("");
@@ -29,7 +27,7 @@ export default function TransferPage() {
   const [tx, setTx] = React.useState("");
 
   const result = useWaitForTransactionReceipt({
-    hash: tx,
+    hash: tx as Address,
   });
 
   const handleSubmit = React.useCallback(async () => {
@@ -39,7 +37,7 @@ export default function TransferPage() {
         return;
       }
       const tx = await sendTransactionAsync({
-        to: address,
+        to: address as Address,
         value: parseEther(amount),
       });
       setTx(tx);
@@ -55,7 +53,7 @@ export default function TransferPage() {
   React.useEffect(() => {
     if (result.status === "success") {
       addMessage("Transaction confirmed", "success");
-      refetch().then((res) => console.log(res));
+      refetch();
     } else if (result.status === "error") {
       addMessage("Transaction failed", "error");
     }

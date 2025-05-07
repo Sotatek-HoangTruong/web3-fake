@@ -16,8 +16,6 @@ export default function ChainPicker() {
     switchChain({ chainId });
   };
 
-  console.log(chain?.name);
-
   return (
     <FormControl className="w-full max-w-xs">
       <Select

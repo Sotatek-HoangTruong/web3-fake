@@ -34,6 +34,8 @@ export default async function RootLayout({
     (await headers()).get('cookie')
   )
 
+  
+
   return (
     <html lang="en">
       <ClientProvider inititalState={initialState}>

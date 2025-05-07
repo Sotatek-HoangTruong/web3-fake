@@ -11,11 +11,8 @@ export default function Header() {
           <Link href="/" className="hover:text-gray-400">
             Home
           </Link>
-          <Link href="/about" className="hover:text-gray-400">
-            About
-          </Link>
-          <Link href="/contact" className="hover:text-gray-400">
-            Contact
+          <Link href="/smart-contract" className="hover:text-gray-400">
+            Contract
           </Link>
         </nav>
         <Balance />
